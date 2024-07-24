@@ -31,6 +31,7 @@ const PersonDetail = () => {
     const [person, setPerson] = useState({});
 
     useEffect(() => {
+        apiGet("/api/persons/" + id).then((data) => setPerson(data));
         // TODO: Add HTTP req.
     }, [id]);
     const country = Country.CZECHIA === person.country ? "Česká republika" : "Slovensko";
