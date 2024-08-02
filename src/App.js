@@ -48,7 +48,7 @@ export function App() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/invoices" className="nav-link">
+              <Link to={"/invoices"} className="nav-link">
                 Faktury
               </Link>
             </li>
@@ -64,12 +64,13 @@ export function App() {
             <Route path="create" element={<PersonForm />} />
             <Route path="edit/:id" element={<PersonForm />} />
           </Route>
-
-          <Route path="/invoices" element={<InvoiceIndex />} />
-          <Route path="/invoices/create" element={<InvoiceForm />} />
-          <Route path="/invoices/edit/:id" element={<InvoiceForm />} />
-
+          <Route path="/invoices">
+            <Route index element={<InvoiceIndex />} />
+            <Route path="create" element={<InvoiceForm />} />
+            <Route path="edit/:id" element={<InvoiceForm />} />
+          </Route>
         </Routes>
+
       </div>
     </Router>
 

@@ -11,7 +11,8 @@ import FlashMessage from "../components/FlashMessage";
 const InvoiceForm = () => {
 
     const navigate = useNavigate();
-    const { id } = useParams();
+
+    const {id} = useParams();
 
     const [invoice, setInvoice] = useState({
         invoiceNumber: "",
@@ -43,7 +44,7 @@ const InvoiceForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        (id ? apiPut("/api/invoices/" + id, invoice) : apiPost("/api/invoices/", invoice))
+        (id ? apiPut("/api/invoices/" + id, invoice) : apiPost("/api/invoices", invoice))
             .then((data) => {
                 setSent(true);
                 setSuccess(true);
