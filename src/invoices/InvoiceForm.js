@@ -102,8 +102,6 @@ const InvoiceForm = () => {
                 />
 
 
-
-
                 <InputField
                     required={true}
                     type="date"
@@ -151,8 +149,6 @@ const InvoiceForm = () => {
                         setInvoice({ ...invoice, vat: e.target.value });
                     }}
                 />
-
-
 
                 <InputField
                     required={true}

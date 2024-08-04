@@ -35,6 +35,7 @@ import PersonDetail from "./persons/PersonDetail";
 import PersonForm from "./persons/PersonForm";
 import InvoiceIndex from "./invoices/InvoiceIndex";
 import InvoiceForm from "./invoices/InvoiceForm"; 
+import InvoiceDetail from "./invoices/InvoiceDetail";
 
 export function App() {
   return (
@@ -68,6 +69,7 @@ export function App() {
             <Route index element={<InvoiceIndex />} />
             <Route path="create" element={<InvoiceForm />} />
             <Route path="edit/:id" element={<InvoiceForm />} />
+            <Route path="show/:id" element={<InvoiceDetail />} />
           </Route>
         </Routes>
 
