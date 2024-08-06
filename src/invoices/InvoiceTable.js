@@ -23,6 +23,8 @@ const InvoiceTable = ({ label, items, deleteInvoice }) => {
                             <td>{index + 1}</td>
                             <td>{item.note}</td>
                             <td>
+
+                            <div className="btn-group">
                                 <Link
                                     to={"/invoices/show/" + item._id}
                                     className="btn btn-sm btn-info"
@@ -41,7 +43,7 @@ const InvoiceTable = ({ label, items, deleteInvoice }) => {
                                 >
                                     Odstranit
                                 </button>
-
+                            </div>
                             </td>
                         </tr>
                     ))}
