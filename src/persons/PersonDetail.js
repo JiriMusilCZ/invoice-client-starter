@@ -25,6 +25,14 @@ import { useParams } from "react-router-dom";
 import { apiGet } from "../utils/api";
 import Country from "./Country";
 
+import {
+    BrowserRouter as Router,
+    Link,
+    Route,
+    Routes,
+    Navigate,
+  } from "react-router-dom";
+
 
 const PersonDetail = () => {
     const { id } = useParams();
@@ -77,6 +85,7 @@ const PersonDetail = () => {
         };
 
         fetchData();
+
     }, [id]);
 
     if (!person) {
@@ -90,84 +99,107 @@ const PersonDetail = () => {
             <div>
                 <h1>Detail osoby</h1>
                 <hr />
-                <h3>{person.name} ({person.identificationNumber})</h3>
-                <p>
-                    <strong>DIČ:</strong>
-                    <br />
-                    {person.taxNumber}
-                </p>
-                <p>
-                    <strong>Bankovní účet:</strong>
-                    <br />
-                    {person.accountNumber}/{person.bankCode} ({person.iban})
-                </p>
-                <p>
-                    <strong>Tel.:</strong>
-                    <br />
-                    {person.telephone}
-                </p>
-                <p>
-                    <strong>Mail:</strong>
-                    <br />
-                    {person.mail}
-                </p>
-                <p>
-                    <strong>Sídlo:</strong>
-                    <br />
-                    {person.street}, {person.city}, {person.zip}, {country}
-                </p>
-                <p>
-                    <strong>Poznámka:</strong>
-                    <br />
-                    {person.note}
-                </p>
+
+                <div className="container mt-4">
+                    <div className="row">
+                        {/* Detail osoby - levá část */}
+                        <div className="col-md-6">
+                            <h3>{person.name} ({person.identificationNumber})</h3>
+                            <p>
+                                <strong>DIČ:</strong>
+                                <br />
+                                {person.taxNumber}
+                            </p>
+                            <p>
+                                <strong>Bankovní účet:</strong>
+                                <br />
+                                {person.accountNumber}/{person.bankCode} ({person.iban})
+                            </p>
+                            <p>
+                                <strong>Tel.:</strong>
+                                <br />
+                                {person.telephone}
+                            </p>
+                            <p>
+                                <strong>Mail:</strong>
+                                <br />
+                                {person.mail}
+                            </p>
+                            <p>
+                                <strong>Sídlo:</strong>
+                                <br />
+                                {person.street}, {person.city}, {person.zip}, {country}
+                            </p>
+                            <p>
+                                <strong>Poznámka:</strong>
+                                <br />
+                                {person.note}
+                            </p>
+
+                            <Link to="/persons" className="btn btn-success">
+                                Zpět
+                            </Link>
+                            
+                        </div>
+
+                        {/* Tabulky - pravá část */}
+                        <div className="col-md-6">
+                            <div className="mb-4">
+                                <h4>Vystavené faktury</h4>
+                                <table className="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Číslo faktury</th>
+                                            <th>Odběratel</th>
+                                            <th>Datum vystavení</th>
+                                            <th>Datum splatnosti</th>
+                                            <th>Cena</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {invoiceSellerData.map((invoice) => (
+                                            <tr key={invoice._id}>
+                                                <td>{invoice.invoiceNumber}</td>
+                                                <td>{invoice.buyer.name}</td>
+                                                <td>{invoice.issued}</td>
+                                                <td>{invoice.dueDate}</td>
+                                                <td>{invoice.price}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+
+                                <h4>Přijaté faktury</h4>
+                                <table className="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Číslo faktury</th>
+                                            <th>Dodavatel</th>
+                                            <th>Datum vystavení</th>
+                                            <th>Datum splatnosti</th>
+                                            <th>Cena</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {invoiceBuyerData.map((item) => (
+                                            <tr key={item._id}>
+                                                <td>{item.invoiceNumber}</td>
+                                                <td>{item.seller.name}</td>
+                                                <td>{item.issued}</td>
+                                                <td>{item.dueDate}</td>
+                                                <td>{item.price}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
             </div>
-            <h4>Vystavené faktury</h4>
-            <table className="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Číslo faktury</th>
-                        <th>Odběratel</th>
-                        <th>Datum vystavení</th>
-                        <th>Datum splatnosti</th>
-                        <th>Cena</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {invoiceSellerData.map((invoice) => (
-                        <tr key={invoice._id}>
-                            <td>{invoice.invoiceNumber}</td>
-                            <td>{invoice.buyer.name}</td>
-                            <td>{invoice.issued}</td>
-                            <td>{invoice.dueDate}</td>
-                            <td>{invoice.price}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <h4>Přijaté faktury</h4>
-            <table className="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Číslo faktury</th>
-                        <th>Dodavatel</th>
-                        <th>Datum vystavení</th>
-                        <th>Datum splatnosti</th>
-                        <th>Cena</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {invoiceBuyerData.map((invoiceBuyer) => (
-                        <tr key={invoiceBuyer._id}>
-                            <td>{invoiceBuyer.invoiceNumber}</td>
-                            <td>{invoiceBuyer.seller.name}</td>
-                            <td>{invoiceBuyer.issued}</td>
-                            <td>{invoiceBuyer.dueDate}</td>
-                            <td>{invoiceBuyer.price}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+  
         </>
     );
 };
