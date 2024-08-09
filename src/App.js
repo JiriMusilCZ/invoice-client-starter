@@ -34,8 +34,9 @@ import PersonIndex from "./persons/PersonIndex";
 import PersonDetail from "./persons/PersonDetail";
 import PersonForm from "./persons/PersonForm";
 import InvoiceIndex from "./invoices/InvoiceIndex";
-import InvoiceForm from "./invoices/InvoiceForm"; 
+import InvoiceForm from "./invoices/InvoiceForm";
 import InvoiceDetail from "./invoices/InvoiceDetail";
+import StatisticsTable from "./statistics/StatisticsTable";
 
 export function App() {
   return (
@@ -53,7 +54,11 @@ export function App() {
                 Faktury
               </Link>
             </li>
-
+            <li className="nav-item">
+              <Link to={"/statistics"} className="nav-link">
+                Statistiky
+              </Link>
+            </li>
           </ul>
         </nav>
 
@@ -71,8 +76,8 @@ export function App() {
             <Route path="edit/:id" element={<InvoiceForm />} />
             <Route path="show/:id" element={<InvoiceDetail />} />
           </Route>
+          <Route path="/statistics" element={<StatisticsTable />} /> {/* Nová cesta pro statistiky */}
         </Routes>
-
       </div>
     </Router>
 

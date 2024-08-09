@@ -94,10 +94,15 @@ const PersonDetail = () => {
 
     const country = person.country === Country.CZECHIA ? "Česká republika" : "Slovensko";
 
+    
+
     return (
         <>
             <div>
                 <h1>Detail osoby</h1>
+
+                
+
                 <hr />
 
                 <div className="container mt-4">
