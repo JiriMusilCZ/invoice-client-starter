@@ -16,7 +16,7 @@ const InvoiceTable = ({ label, items, deleteInvoice }) => {
                         <th>Číslo faktury</th>
                         <th>Odběratel</th>
                         <th>Dodavatel</th>
-                        <th>Popis plnění</th>
+                        <th>Produkt</th>
                         <th>Cena</th>
                         <th colSpan={3}>Akce</th>
                     </tr>
@@ -36,7 +36,7 @@ const InvoiceTable = ({ label, items, deleteInvoice }) => {
                                     {item.seller.name}
                                 </Link>
                             </td>
-                            <td>{item.note}</td>
+                            <td>{item.product}</td>
                             <td>{item.price}</td>
                             <td>
 
