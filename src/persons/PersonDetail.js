@@ -24,6 +24,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { apiGet } from "../utils/api";
 import Country from "./Country";
+import GoBackButton from "../components/GoBackButton";
 
 import {
     BrowserRouter as Router,
@@ -31,7 +32,7 @@ import {
     Route,
     Routes,
     Navigate,
-  } from "react-router-dom";
+} from "react-router-dom";
 
 
 const PersonDetail = () => {
@@ -94,14 +95,14 @@ const PersonDetail = () => {
 
     const country = person.country === Country.CZECHIA ? "Česká republika" : "Slovensko";
 
-    
+
 
     return (
         <>
             <div>
                 <h1>Detail osoby</h1>
 
-                
+
 
                 <hr />
 
@@ -141,10 +142,8 @@ const PersonDetail = () => {
                                 {person.note}
                             </p>
 
-                            <Link to="/persons" className="btn btn-success">
-                                Zpět
-                            </Link>
-                            
+                            <GoBackButton/>
+
                         </div>
 
                         {/* Tabulky - pravá část */}
@@ -165,7 +164,11 @@ const PersonDetail = () => {
                                         {invoiceSellerData.map((invoice) => (
                                             <tr key={invoice._id}>
                                                 <td>{invoice.invoiceNumber}</td>
-                                                <td>{invoice.buyer.name}</td>
+                                                <td>
+                                                    <Link to={`/persons/show/${invoice.buyer._id}`}>
+                                                        {invoice.buyer.name}
+                                                    </Link>
+                                                </td>
                                                 <td>{invoice.issued}</td>
                                                 <td>{invoice.dueDate}</td>
                                                 <td>{invoice.price}</td>
@@ -189,7 +192,11 @@ const PersonDetail = () => {
                                         {invoiceBuyerData.map((item) => (
                                             <tr key={item._id}>
                                                 <td>{item.invoiceNumber}</td>
-                                                <td>{item.seller.name}</td>
+                                                <td>
+                                                    <Link to={`/persons/show/${item.seller._id}`}>
+                                                        {item.seller.name}
+                                                    </Link>
+                                                </td>
                                                 <td>{item.issued}</td>
                                                 <td>{item.dueDate}</td>
                                                 <td>{item.price}</td>
@@ -197,14 +204,14 @@ const PersonDetail = () => {
                                         ))}
                                     </tbody>
                                 </table>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
-        
+
             </div>
-  
+
         </>
     );
 };

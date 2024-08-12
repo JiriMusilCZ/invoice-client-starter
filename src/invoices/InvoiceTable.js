@@ -37,7 +37,7 @@ const InvoiceTable = ({ label, items, deleteInvoice }) => {
                                 </Link>
                             </td>
                             <td>{item.product}</td>
-                            <td>{item.price}</td>
+                            <td>{item.price.toLocaleString('cs-CZ')} Kč</td>
                             <td>
 
                                 <div className="btn-group">

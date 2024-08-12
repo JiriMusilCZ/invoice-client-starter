@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 const InvoiceFilter = (props) => {
     const { handleChange, handleSubmit, filter, buyerList, sellerList, confirm, resetFilters } = props;
 
+    const handleReset = () => {
+        window.location.reload(true);
+    };
+
     return (
         <form onSubmit={handleSubmit}>
             <div className="row">
@@ -85,13 +89,15 @@ const InvoiceFilter = (props) => {
                     >
                         {confirm}
                     </button>
-                    <Link
-                        to="/invoices"
-                      
+                
+<br/>
+                    <button
+                        type="button"
                         className="btn btn-success float-right mt-2"
+                        onClick={handleReset}
                     >
                         Reset
-                    </Link>
+                    </button>
                 </div>
             </div>
         </form>
